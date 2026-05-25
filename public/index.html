@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PwP Full Platform</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      min-height: 100vh;
+      background: #0a1628;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      color: #d4e3f7;
+      padding: 0 0 5rem;
+    }
+
+    header {
+      background: linear-gradient(180deg, #0c1d35 0%, #0a1628 100%);
+      border-bottom: 1px solid rgba(200, 150, 42, 0.2);
+      padding: 2.8rem 2rem 2.4rem;
+      text-align: center;
+    }
+
+    .pwp-badge {
+      display: inline-block;
+      font-size: 0.72rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: rgba(200, 150, 42, 0.6);
+      margin-bottom: 1rem;
+      font-weight: 500;
+    }
+
+    h1 {
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 700;
+      color: #ffffff;
+      letter-spacing: -0.01em;
+      margin-bottom: 0.5rem;
+    }
+
+    h1 span { color: #c8962a; }
+
+    .subtitle {
+      font-size: 0.92rem;
+      color: rgba(212, 227, 247, 0.5);
+      max-width: 560px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+
+    main {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 3rem 1.5rem 0;
+      display: flex;
+      flex-direction: column;
+      gap: 2.8rem;
+    }
+
+    .section-label {
+      font-size: 0.72rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: rgba(200, 150, 42, 0.55);
+      font-weight: 600;
+      margin-bottom: 1rem;
+      border-bottom: 1px solid rgba(200, 150, 42, 0.12);
+      padding-bottom: 0.6rem;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.4rem;
+    }
+
+    @media (max-width: 640px) {
+      .grid { grid-template-columns: 1fr; }
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(200, 150, 42, 0.15);
+      border-radius: 12px;
+      padding: 1.8rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.9rem;
+      transition: border-color 0.25s, box-shadow 0.25s, transform 0.2s;
+    }
+
+    .card:hover {
+      border-color: rgba(200, 150, 42, 0.45);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35), 0 0 20px rgba(200, 150, 42, 0.06);
+      transform: translateY(-2px);
+    }
+
+    .card-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 0.8rem;
+    }
+
+    .card-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #c8962a;
+      letter-spacing: -0.01em;
+    }
+
+    .persona-badge {
+      background: rgba(200, 150, 42, 0.12);
+      border: 1px solid rgba(200, 150, 42, 0.25);
+      color: rgba(200, 150, 42, 0.85);
+      font-size: 0.68rem;
+      letter-spacing: 0.08em;
+      padding: 0.25rem 0.6rem;
+      border-radius: 20px;
+      white-space: nowrap;
+      font-weight: 600;
+      flex-shrink: 0;
+      margin-top: 0.2rem;
+    }
+
+    .category-tag {
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(212, 227, 247, 0.35);
+      font-weight: 500;
+    }
+
+    .card-desc {
+      font-size: 0.87rem;
+      color: rgba(212, 227, 247, 0.5);
+      line-height: 1.55;
+      flex: 1;
+    }
+
+    .launch-btn {
+      display: inline-block;
+      width: 100%;
+      text-align: center;
+      padding: 0.72rem 1rem;
+      background: #0a1628;
+      border: 1px solid rgba(200, 150, 42, 0.5);
+      border-radius: 8px;
+      color: #c8962a;
+      font-size: 0.82rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      text-decoration: none;
+      font-weight: 600;
+      transition: background 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
+      cursor: pointer;
+    }
+
+    .launch-btn:hover {
+      background: #c8962a;
+      color: #0a1628;
+      border-color: #c8962a;
+      box-shadow: 0 4px 16px rgba(200, 150, 42, 0.3);
+    }
+
+    footer {
+      text-align: center;
+      padding: 2.5rem 1rem 0;
+      font-size: 0.72rem;
+      letter-spacing: 0.15em;
+      color: rgba(212, 227, 247, 0.2);
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="pwp-badge">Projects with a Purpose</div>
+    <h1>PwP <span>Full Platform</span></h1>
+    <p class="subtitle">Projects with a Purpose — Full Training Suite. Every practice tool in the ecosystem, one door.</p>
+  </header>
+
+  <main>
+
+    <!-- REI Tools Section -->
+    <div>
+      <div class="section-label">REI Tools</div>
+      <div class="grid">
+
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <div class="card-title">SellerPractice</div>
+              <div class="category-tag">Acquisition calls</div>
+            </div>
+            <div class="persona-badge">6 personas</div>
+          </div>
+          <p class="card-desc">Master the seller conversation — from cold outreach to motivated-seller close. Practice objections, rapport, and follow-up.</p>
+          <a class="launch-btn" id="btn-seller" href="#">Launch</a>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <div class="card-title">BuyerPractice</div>
+              <div class="category-tag">Buyer qualification &amp; conversion</div>
+            </div>
+            <div class="persona-badge">5 personas</div>
+          </div>
+          <p class="card-desc">Qualify and convert cash buyers, end-user buyers, and wholesalers. Sharpen your buy-box questions and urgency handling.</p>
+          <a class="launch-btn" id="btn-buyer" href="#">Launch</a>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <div class="card-title">LenderPractice</div>
+              <div class="category-tag">Hard money &amp; DSCR conversations</div>
+            </div>
+            <div class="persona-badge">4 personas</div>
+          </div>
+          <p class="card-desc">Navigate deal terms with hard money lenders, DSCR underwriters, and private capital sources. Practice loan scenarios start to finish.</p>
+          <a class="launch-btn" id="btn-lender" href="#">Launch</a>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <div class="card-title">BrokerPractice</div>
+              <div class="category-tag">Agent recruiting &amp; listing presentations</div>
+            </div>
+            <div class="persona-badge">3 personas</div>
+          </div>
+          <p class="card-desc">Refine your agent recruiting pitch and listing presentation delivery. Practice value propositions and handling broker-to-broker dynamics.</p>
+          <a class="launch-btn" id="btn-broker" href="#">Launch</a>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <div class="card-title">StoragePractice</div>
+              <div class="category-tag">Storage acquisition, tenant &amp; investor calls</div>
+            </div>
+            <div class="persona-badge">5 personas</div>
+          </div>
+          <p class="card-desc">Handle self-storage-specific conversations: owner acquisitions, tenant negotiations, investor pitches, and operational objections.</p>
+          <a class="launch-btn" id="btn-storage" href="#">Launch</a>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <div class="card-title">CommercialPractice</div>
+              <div class="category-tag">Commercial leasing, investment &amp; listing</div>
+            </div>
+            <div class="persona-badge">5 personas</div>
+          </div>
+          <p class="card-desc">Build confidence in commercial conversations — NNN leases, cap-rate negotiations, tenant buildouts, and investor underwriting calls.</p>
+          <a class="launch-btn" id="btn-commercial" href="#">Launch</a>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <div class="card-title">AgentPractice</div>
+              <div class="category-tag">Agent coaching &amp; recruiting conversations</div>
+            </div>
+            <div class="persona-badge">4 personas</div>
+          </div>
+          <p class="card-desc">Sharpen your agent recruiting pitch, handle switching objections, coach agents through deal collapses, and explain Gorilla's flat-fee structure cold.</p>
+          <a class="launch-btn" id="btn-agent" href="#">Launch</a>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <div class="card-title">WholesalerPractice</div>
+              <div class="category-tag">Off-market acquisition calls</div>
+            </div>
+            <div class="persona-badge">4 personas</div>
+          </div>
+          <p class="card-desc">Run H4H-criteria acquisition calls — motivated sellers, competitive situations, absentee owners, pre-foreclosure. Off-market only.</p>
+          <a class="launch-btn" id="btn-wholesaler" href="#">Launch</a>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <div class="card-title">Virtual Steve</div>
+              <div class="category-tag">REI Q&amp;A advisor</div>
+            </div>
+            <div class="persona-badge">1 advisor</div>
+          </div>
+          <p class="card-desc">Ask anything about deal structure, Gorilla systems, H4H criteria, or platform workflows. Steve's brain, available 24/7.</p>
+          <a class="launch-btn" id="btn-virtualsteve" href="#">Launch</a>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <div class="card-title">REI Educator</div>
+              <div class="category-tag">Team training &amp; onboarding</div>
+            </div>
+            <div class="persona-badge">varies</div>
+          </div>
+          <p class="card-desc">Structured real estate education module for new agents, assistants, and team members. Covers deal math, terminology, platform workflow.</p>
+          <a class="launch-btn" id="btn-educator" href="#">Launch</a>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Presentation & Language Section -->
+    <div>
+      <div class="section-label">Presentation &amp; Language</div>
+      <div class="grid">
+
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <div class="card-title">RaiseReady</div>
+              <div class="category-tag">Fundraising &amp; investor conversations</div>
+            </div>
+            <div class="persona-badge">varies</div>
+          </div>
+          <p class="card-desc">Practice high-stakes fundraising conversations with simulated investors. Build confidence before the real ask.</p>
+          <a class="launch-btn" id="btn-raiseready" href="#">Launch</a>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <div class="card-title">SayIt</div>
+              <div class="category-tag">Difficult conversations &amp; clarity practice</div>
+            </div>
+            <div class="persona-badge">varies</div>
+          </div>
+          <p class="card-desc">Say the hard thing clearly. Practice difficult conversations, feedback delivery, and high-stakes communication without the pressure of a real audience.</p>
+          <a class="launch-btn" id="btn-sayit" href="#">Launch</a>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <div class="card-title">SceneLoop</div>
+              <div class="category-tag">Script rehearsal &amp; scene practice</div>
+            </div>
+            <div class="persona-badge">any script</div>
+          </div>
+          <p class="card-desc">Upload your script. AI plays every other character. Rehearse until every line lands exactly right.</p>
+          <a class="launch-btn" id="btn-sceneloop" href="#">Launch</a>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <div class="card-title">SpeakUp Practice</div>
+              <div class="category-tag">Public speaking &amp; presentation</div>
+            </div>
+            <div class="persona-badge">varies</div>
+          </div>
+          <p class="card-desc">Build public speaking confidence through structured practice. Presentations, pitches, and on-camera delivery reps.</p>
+          <a class="launch-btn" id="btn-speakup" href="#">Launch</a>
+        </div>
+
+      </div>
+    </div>
+
+    <footer>Projects with a Purpose &bull; Full Training Suite &bull; PwP &copy; 2026</footer>
+  </main>
+
+  <script>
+    fetch('/config')
+      .then(r => r.json())
+      .then(cfg => {
+        // REI Tools
+        document.getElementById('btn-seller').href       = cfg.sellerUrl;
+        document.getElementById('btn-buyer').href        = cfg.buyerUrl;
+        document.getElementById('btn-lender').href       = cfg.lenderUrl;
+        document.getElementById('btn-broker').href       = cfg.brokerUrl;
+        document.getElementById('btn-storage').href      = cfg.storageUrl;
+        document.getElementById('btn-commercial').href   = cfg.commercialUrl;
+        document.getElementById('btn-agent').href        = cfg.agentUrl;
+        document.getElementById('btn-wholesaler').href   = cfg.wholesalerUrl;
+        document.getElementById('btn-virtualsteve').href = cfg.virtualSteveUrl;
+        document.getElementById('btn-educator').href     = cfg.educatorUrl;
+        // Presentation & Language
+        document.getElementById('btn-raiseready').href   = cfg.raisereadyUrl;
+        document.getElementById('btn-sayit').href        = cfg.sayitUrl;
+        document.getElementById('btn-sceneloop').href    = cfg.scenelloopUrl;
+        document.getElementById('btn-speakup').href      = cfg.speakupUrl;
+      })
+      .catch(err => console.warn('Config load failed:', err));
+  </script>
+</body>
+</html>
