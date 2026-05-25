@@ -20,6 +20,8 @@ app.get('/config', (req, res) => {
     wholesalerUrl:   process.env.WHOLESALER_URL    || 'https://wholesaler-practice-production.up.railway.app',
     virtualSteveUrl: 'https://virtual-steve-production.up.railway.app',
     educatorUrl:     process.env.EDUCATOR_URL      || 'https://voice-roleplay-rei-training-production.up.railway.app',
+    // Agent Training & Ethics
+    agentWalkthroughUrl: process.env.AGENT_WALKTHROUGH_URL || 'https://voice-roleplay-agent-walkthrough-production.up.railway.app',
     // Presentation & Language Tools
     raisereadyUrl:   process.env.RAISEREADY_URL    || 'https://raiseready-practice-production.up.railway.app',
     sayitUrl:        process.env.SAYIT_URL         || 'https://sayit-practice-production.up.railway.app',
