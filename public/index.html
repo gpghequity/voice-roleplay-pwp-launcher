@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>PwP Full Platform</title>
+  <title>Practice Before It Counts — Projects with a Purpose</title>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -12,16 +12,34 @@
       background: #0a1628;
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
       color: #d4e3f7;
-      padding: 0 0 5rem;
+      padding-bottom: 6rem;
     }
 
+    /* ── Browser warning ─────────────────────────────────────────── */
+    #browser-warn {
+      background: #c8962a;
+      color: #0a1628;
+      text-align: center;
+      padding: 0.65rem 1.5rem;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      position: relative;
+    }
+    #browser-warn a { color: #0a1628; text-decoration: underline; }
+    #browser-warn .dismiss {
+      position: absolute; right: 1rem; top: 50%; transform: translateY(-50%);
+      cursor: pointer; font-size: 1rem; opacity: 0.7;
+    }
+    #browser-warn.hidden { display: none; }
+
+    /* ── Header ──────────────────────────────────────────────────── */
     header {
       background: linear-gradient(180deg, #0c1d35 0%, #0a1628 100%);
       border-bottom: 1px solid rgba(200, 150, 42, 0.2);
       padding: 2.8rem 2rem 2.4rem;
       text-align: center;
     }
-
     .pwp-badge {
       display: inline-block;
       font-size: 0.72rem;
@@ -31,7 +49,6 @@
       margin-bottom: 1rem;
       font-weight: 500;
     }
-
     h1 {
       font-size: clamp(1.8rem, 4vw, 2.8rem);
       font-weight: 700;
@@ -39,21 +56,55 @@
       letter-spacing: -0.01em;
       margin-bottom: 0.5rem;
     }
-
     h1 span { color: #c8962a; }
-
+    .tagline {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: #c8962a;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.5rem;
+    }
     .subtitle {
       font-size: 0.92rem;
       color: rgba(212, 227, 247, 0.5);
-      max-width: 560px;
+      max-width: 580px;
       margin: 0 auto;
-      line-height: 1.6;
+      line-height: 1.65;
     }
 
+    /* ── Audience filter ─────────────────────────────────────────── */
+    .filter-bar {
+      display: flex;
+      justify-content: center;
+      gap: 0.6rem;
+      padding: 1.4rem 1rem 0;
+      flex-wrap: wrap;
+    }
+    .filter-btn {
+      padding: 0.4rem 1rem;
+      border-radius: 20px;
+      border: 1px solid rgba(200, 150, 42, 0.3);
+      background: transparent;
+      color: rgba(212, 227, 247, 0.55);
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .filter-btn:hover, .filter-btn.active {
+      border-color: #c8962a;
+      color: #c8962a;
+      background: rgba(200, 150, 42, 0.08);
+    }
+    .filter-btn.active { background: rgba(200, 150, 42, 0.14); }
+
+    /* ── Main grid ───────────────────────────────────────────────── */
     main {
-      max-width: 960px;
+      max-width: 980px;
       margin: 0 auto;
-      padding: 3rem 1.5rem 0;
+      padding: 2.6rem 1.5rem 0;
       display: flex;
       flex-direction: column;
       gap: 2.8rem;
@@ -68,6 +119,16 @@
       margin-bottom: 1rem;
       border-bottom: 1px solid rgba(200, 150, 42, 0.12);
       padding-bottom: 0.6rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .section-label .audience-tag {
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      color: rgba(212, 227, 247, 0.25);
+      font-weight: 500;
+      text-transform: uppercase;
     }
 
     .grid {
@@ -75,26 +136,32 @@
       grid-template-columns: repeat(2, 1fr);
       gap: 1.4rem;
     }
+    @media (max-width: 640px) { .grid { grid-template-columns: 1fr; } }
 
-    @media (max-width: 640px) {
-      .grid { grid-template-columns: 1fr; }
-    }
-
+    /* ── Cards ───────────────────────────────────────────────────── */
     .card {
       background: rgba(255, 255, 255, 0.04);
       border: 1px solid rgba(200, 150, 42, 0.15);
       border-radius: 12px;
-      padding: 1.8rem;
+      padding: 1.6rem 1.8rem;
       display: flex;
       flex-direction: column;
-      gap: 0.9rem;
+      gap: 0.85rem;
       transition: border-color 0.25s, box-shadow 0.25s, transform 0.2s;
     }
-
     .card:hover {
       border-color: rgba(200, 150, 42, 0.45);
       box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35), 0 0 20px rgba(200, 150, 42, 0.06);
       transform: translateY(-2px);
+    }
+    /* School cards get a subtle teal tint */
+    .card.school-card {
+      border-color: rgba(42, 180, 180, 0.2);
+      background: rgba(42, 180, 180, 0.03);
+    }
+    .card.school-card:hover {
+      border-color: rgba(42, 180, 180, 0.5);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.3), 0 0 20px rgba(42,180,180,0.06);
     }
 
     .card-header {
@@ -103,42 +170,64 @@
       justify-content: space-between;
       gap: 0.8rem;
     }
-
     .card-title {
-      font-size: 1.15rem;
+      font-size: 1.1rem;
       font-weight: 700;
       color: #c8962a;
       letter-spacing: -0.01em;
     }
+    .school-card .card-title { color: #3ac9c9; }
 
     .persona-badge {
       background: rgba(200, 150, 42, 0.12);
       border: 1px solid rgba(200, 150, 42, 0.25);
       color: rgba(200, 150, 42, 0.85);
-      font-size: 0.68rem;
+      font-size: 0.66rem;
       letter-spacing: 0.08em;
-      padding: 0.25rem 0.6rem;
+      padding: 0.22rem 0.55rem;
       border-radius: 20px;
       white-space: nowrap;
       font-weight: 600;
       flex-shrink: 0;
       margin-top: 0.2rem;
     }
+    .school-card .persona-badge {
+      background: rgba(42, 180, 180, 0.12);
+      border-color: rgba(42, 180, 180, 0.25);
+      color: rgba(42, 180, 180, 0.85);
+    }
 
     .category-tag {
-      font-size: 0.72rem;
-      letter-spacing: 0.18em;
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
       text-transform: uppercase;
-      color: rgba(212, 227, 247, 0.35);
+      color: rgba(212, 227, 247, 0.32);
       font-weight: 500;
     }
-
     .card-desc {
-      font-size: 0.87rem;
-      color: rgba(212, 227, 247, 0.5);
-      line-height: 1.55;
+      font-size: 0.86rem;
+      color: rgba(212, 227, 247, 0.52);
+      line-height: 1.58;
       flex: 1;
     }
+
+    /* Audience pills */
+    .audience-pills {
+      display: flex;
+      gap: 0.4rem;
+      flex-wrap: wrap;
+    }
+    .pill {
+      font-size: 0.64rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.18rem 0.5rem;
+      border-radius: 10px;
+      font-weight: 600;
+    }
+    .pill-re  { background: rgba(200,150,42,0.1);  color: rgba(200,150,42,0.7); }
+    .pill-sch { background: rgba(42,180,180,0.1);  color: rgba(42,180,180,0.7); }
+    .pill-biz { background: rgba(120,180,255,0.1); color: rgba(120,180,255,0.7); }
 
     .launch-btn {
       display: inline-block;
@@ -149,44 +238,252 @@
       border: 1px solid rgba(200, 150, 42, 0.5);
       border-radius: 8px;
       color: #c8962a;
-      font-size: 0.82rem;
-      letter-spacing: 0.15em;
+      font-size: 0.8rem;
+      letter-spacing: 0.14em;
       text-transform: uppercase;
       text-decoration: none;
       font-weight: 600;
       transition: background 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
       cursor: pointer;
     }
-
     .launch-btn:hover {
       background: #c8962a;
       color: #0a1628;
       border-color: #c8962a;
       box-shadow: 0 4px 16px rgba(200, 150, 42, 0.3);
     }
+    .school-card .launch-btn {
+      border-color: rgba(42, 180, 180, 0.5);
+      color: #3ac9c9;
+    }
+    .school-card .launch-btn:hover {
+      background: #3ac9c9;
+      color: #0a1628;
+      border-color: #3ac9c9;
+    }
 
+    /* ── Beta CTA ────────────────────────────────────────────────── */
+    .beta-section {
+      background: linear-gradient(135deg, rgba(200,150,42,0.07) 0%, rgba(42,180,180,0.04) 100%);
+      border: 1px solid rgba(200, 150, 42, 0.18);
+      border-radius: 14px;
+      padding: 2.2rem 2rem;
+      text-align: center;
+    }
+    .beta-section h2 {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: #c8962a;
+      margin-bottom: 0.5rem;
+    }
+    .beta-section p {
+      font-size: 0.88rem;
+      color: rgba(212,227,247,0.5);
+      max-width: 480px;
+      margin: 0 auto 1.4rem;
+      line-height: 1.6;
+    }
+    .beta-form {
+      display: flex;
+      gap: 0.7rem;
+      max-width: 440px;
+      margin: 0 auto;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .beta-form input, .beta-form select {
+      flex: 1;
+      min-width: 180px;
+      padding: 0.65rem 1rem;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(200,150,42,0.25);
+      border-radius: 8px;
+      color: #d4e3f7;
+      font-size: 0.85rem;
+    }
+    .beta-form input::placeholder { color: rgba(212,227,247,0.3); }
+    .beta-form button {
+      padding: 0.65rem 1.4rem;
+      background: #c8962a;
+      border: none;
+      border-radius: 8px;
+      color: #0a1628;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+    .beta-form button:hover { opacity: 0.88; }
+    #beta-thanks { display: none; color: #c8962a; font-weight: 600; margin-top: 0.7rem; font-size: 0.88rem; }
+
+    /* ── Footer ──────────────────────────────────────────────────── */
     footer {
       text-align: center;
       padding: 2.5rem 1rem 0;
-      font-size: 0.72rem;
+      font-size: 0.7rem;
       letter-spacing: 0.15em;
-      color: rgba(212, 227, 247, 0.2);
+      color: rgba(212, 227, 247, 0.18);
+      line-height: 2;
     }
+
+    /* ── Feedback float button ───────────────────────────────────── */
+    #feedback-float {
+      position: fixed;
+      bottom: 1.5rem;
+      right: 1.5rem;
+      background: #c8962a;
+      color: #0a1628;
+      border: none;
+      border-radius: 28px;
+      padding: 0.65rem 1.2rem;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      cursor: pointer;
+      box-shadow: 0 4px 16px rgba(200,150,42,0.35);
+      z-index: 100;
+      transition: opacity 0.2s, transform 0.2s;
+    }
+    #feedback-float:hover { opacity: 0.9; transform: scale(1.04); }
+
+    /* ── Modal ───────────────────────────────────────────────────── */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.7);
+      z-index: 200;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+    }
+    .modal-overlay.open { display: flex; }
+    .modal {
+      background: #0d1f3c;
+      border: 1px solid rgba(200,150,42,0.25);
+      border-radius: 14px;
+      padding: 2rem;
+      max-width: 480px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+    .modal h3 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #c8962a;
+      margin-bottom: 0.3rem;
+    }
+    .modal .modal-sub {
+      font-size: 0.82rem;
+      color: rgba(212,227,247,0.4);
+      margin-bottom: 1.4rem;
+    }
+    .modal label {
+      display: block;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(212,227,247,0.5);
+      margin-bottom: 0.35rem;
+      margin-top: 1rem;
+    }
+    .modal label:first-of-type { margin-top: 0; }
+    .modal select, .modal input, .modal textarea {
+      width: 100%;
+      padding: 0.6rem 0.85rem;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(200,150,42,0.2);
+      border-radius: 7px;
+      color: #d4e3f7;
+      font-size: 0.85rem;
+    }
+    .modal textarea { min-height: 80px; resize: vertical; }
+    .modal .rating-row {
+      display: flex;
+      gap: 0.5rem;
+      margin-top: 0.3rem;
+    }
+    .modal .rating-btn {
+      flex: 1;
+      padding: 0.45rem 0.3rem;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(200,150,42,0.15);
+      border-radius: 7px;
+      color: rgba(212,227,247,0.5);
+      font-size: 0.78rem;
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.15s;
+    }
+    .modal .rating-btn:hover, .modal .rating-btn.selected {
+      background: rgba(200,150,42,0.15);
+      border-color: #c8962a;
+      color: #c8962a;
+    }
+    .modal-footer {
+      display: flex;
+      justify-content: flex-end;
+      gap: 0.7rem;
+      margin-top: 1.4rem;
+    }
+    .modal-footer button {
+      padding: 0.6rem 1.2rem;
+      border-radius: 7px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      cursor: pointer;
+      letter-spacing: 0.08em;
+    }
+    .btn-cancel { background: transparent; border: 1px solid rgba(212,227,247,0.15); color: rgba(212,227,247,0.4); }
+    .btn-submit { background: #c8962a; border: none; color: #0a1628; }
+    .btn-submit:hover { opacity: 0.9; }
+    #feedback-thanks { display: none; text-align: center; padding: 1.5rem 0; }
+    #feedback-thanks p { color: #c8962a; font-weight: 600; font-size: 1rem; margin-bottom: 0.4rem; }
+    #feedback-thanks small { color: rgba(212,227,247,0.4); font-size: 0.8rem; }
+
+    /* ── Hidden cards for audience filter ───────────────────────── */
+    .section-group { transition: opacity 0.25s; }
+    .section-group.hidden { display: none; }
   </style>
 </head>
 <body>
 
+  <!-- ── Browser warning (always visible) ──────────────────────── -->
+  <div id="browser-warn">
+    🎤 Voice features require <strong>Chrome or Edge</strong> desktop. Safari, Firefox, and mobile browsers are not supported.
+    &nbsp;<a href="https://www.google.com/chrome/" target="_blank" rel="noopener">Get Chrome →</a>
+    <span class="dismiss" onclick="document.getElementById('browser-warn').classList.add('hidden')">✕</span>
+  </div>
+
+  <!-- ── Header ──────────────────────────────────────────────────── -->
   <header>
     <div class="pwp-badge">Projects with a Purpose</div>
     <h1>PwP <span>Full Platform</span></h1>
-    <p class="subtitle">Every training tool in the ecosystem — one door. Real estate, specialty assets, finance, and presentation.</p>
+    <div class="tagline">Practice Before It Counts.</div>
+    <p class="subtitle">Every training tool in the ecosystem — one door. Real estate professionals, students, and business communicators: build the skills before the stakes are real.</p>
   </header>
+
+  <!-- ── Audience filter ─────────────────────────────────────────── -->
+  <div class="filter-bar">
+    <button class="filter-btn active" onclick="filterAudience('all')">All Tools</button>
+    <button class="filter-btn" onclick="filterAudience('re')">Real Estate / Lending</button>
+    <button class="filter-btn" onclick="filterAudience('school')">School / Career</button>
+    <button class="filter-btn" onclick="filterAudience('biz')">Business / General</button>
+  </div>
 
   <main>
 
-    <!-- REI Acquisition -->
-    <div>
-      <div class="section-label">REI Acquisition</div>
+    <!-- ─────────────────────────────────────────────────────────── -->
+    <!-- SECTION 1: REI Acquisition                                 -->
+    <!-- ─────────────────────────────────────────────────────────── -->
+    <div class="section-group" data-audience="re">
+      <div class="section-label">
+        Real Estate Acquisition
+        <span class="audience-tag">RE Professionals</span>
+      </div>
       <div class="grid">
 
         <div class="card">
@@ -197,8 +494,9 @@
             </div>
             <div class="persona-badge">beginner</div>
           </div>
-          <p class="card-desc">Motivated sellers, tired landlords, probate heirs, skeptical buyers, hard money lenders. AI scoring after each call.</p>
-          <a class="launch-btn" id="btn-acquisition" href="#">Launch</a>
+          <p class="card-desc">Motivated sellers, tired landlords, probate heirs, skeptical buyers, hard money lenders. AI scoring after every call — know exactly where you lost them.</p>
+          <div class="audience-pills"><span class="pill pill-re">Acquisition</span></div>
+          <a class="launch-btn" id="btn-acquisition" href="#" target="_blank" rel="noopener" onclick="trackLaunch('Acquisition Training')">Launch</a>
         </div>
 
         <div class="card">
@@ -209,8 +507,9 @@
             </div>
             <div class="persona-badge">advanced</div>
           </div>
-          <p class="card-desc">Divorce sellers, angry tenants, code enforcement, hoarding sellers, predatory wholesalers. Build resilience under pressure.</p>
-          <a class="launch-btn" id="btn-hardscenarios" href="#">Launch</a>
+          <p class="card-desc">Divorce sellers, angry tenants, code enforcement, hoarding sellers, predatory wholesalers. Build resilience you can only get from repetition under pressure.</p>
+          <div class="audience-pills"><span class="pill pill-re">Acquisition</span></div>
+          <a class="launch-btn" id="btn-hardscenarios" href="#" target="_blank" rel="noopener" onclick="trackLaunch('Hard Scenarios')">Launch</a>
         </div>
 
         <div class="card">
@@ -221,8 +520,9 @@
             </div>
             <div class="persona-badge">6 personas</div>
           </div>
-          <p class="card-desc">Master the seller conversation — cold outreach to motivated-seller close. Objections, rapport, and follow-up reps.</p>
-          <a class="launch-btn" id="btn-seller" href="#">Launch</a>
+          <p class="card-desc">Master the seller conversation — cold outreach to motivated-seller close. Objections, rapport, and follow-up reps until it's automatic.</p>
+          <div class="audience-pills"><span class="pill pill-re">Seller</span></div>
+          <a class="launch-btn" id="btn-seller" href="#" target="_blank" rel="noopener" onclick="trackLaunch('SellerPractice')">Launch</a>
         </div>
 
         <div class="card">
@@ -233,16 +533,22 @@
             </div>
             <div class="persona-badge">4 personas</div>
           </div>
-          <p class="card-desc">H4H-criteria acquisition calls — motivated sellers, competitive situations, absentee owners, pre-foreclosure. Off-market only.</p>
-          <a class="launch-btn" id="btn-wholesaler" href="#">Launch</a>
+          <p class="card-desc">H4H-criteria acquisition calls — motivated sellers, competitive situations, absentee owners, pre-foreclosure. Off-market focus only; no listed properties.</p>
+          <div class="audience-pills"><span class="pill pill-re">Wholesale</span></div>
+          <a class="launch-btn" id="btn-wholesaler" href="#" target="_blank" rel="noopener" onclick="trackLaunch('WholesalerPractice')">Launch</a>
         </div>
 
       </div>
     </div>
 
-    <!-- REI Representation -->
-    <div>
-      <div class="section-label">REI Representation</div>
+    <!-- ─────────────────────────────────────────────────────────── -->
+    <!-- SECTION 2: Representation / Agent Practice                 -->
+    <!-- ─────────────────────────────────────────────────────────── -->
+    <div class="section-group" data-audience="re">
+      <div class="section-label">
+        Representation &amp; Agent Practice
+        <span class="audience-tag">Licensed Agents &amp; Brokers</span>
+      </div>
       <div class="grid">
 
         <div class="card">
@@ -253,8 +559,9 @@
             </div>
             <div class="persona-badge">5 personas</div>
           </div>
-          <p class="card-desc">Qualify and convert cash buyers, end-user buyers, and wholesalers. Sharpen buy-box questions and urgency handling.</p>
-          <a class="launch-btn" id="btn-buyer" href="#">Launch</a>
+          <p class="card-desc">Qualify and convert cash buyers, end-user buyers, and wholesalers. Sharpen buy-box questions and build urgency without pressure tactics.</p>
+          <div class="audience-pills"><span class="pill pill-re">Buyer Rep</span></div>
+          <a class="launch-btn" id="btn-buyer" href="#" target="_blank" rel="noopener" onclick="trackLaunch('BuyerPractice')">Launch</a>
         </div>
 
         <div class="card">
@@ -265,8 +572,9 @@
             </div>
             <div class="persona-badge">3 personas</div>
           </div>
-          <p class="card-desc">Refine your agent recruiting pitch and listing presentation delivery. Value propositions and broker-to-broker dynamics.</p>
-          <a class="launch-btn" id="btn-broker" href="#">Launch</a>
+          <p class="card-desc">Refine your agent recruiting pitch and listing presentation delivery. Value propositions and broker-to-broker dynamics that actually close.</p>
+          <div class="audience-pills"><span class="pill pill-re">Broker</span></div>
+          <a class="launch-btn" id="btn-broker" href="#" target="_blank" rel="noopener" onclick="trackLaunch('BrokerPractice')">Launch</a>
         </div>
 
         <div class="card">
@@ -278,7 +586,8 @@
             <div class="persona-badge">4 personas</div>
           </div>
           <p class="card-desc">Sharpen your agent recruiting pitch, handle switching objections, coach through deal collapses, explain Gorilla's flat-fee structure cold.</p>
-          <a class="launch-btn" id="btn-agent" href="#">Launch</a>
+          <div class="audience-pills"><span class="pill pill-re">Agent</span></div>
+          <a class="launch-btn" id="btn-agent" href="#" target="_blank" rel="noopener" onclick="trackLaunch('AgentPractice')">Launch</a>
         </div>
 
         <div class="card">
@@ -290,15 +599,21 @@
             <div class="persona-badge">6 scenarios</div>
           </div>
           <p class="card-desc">Material fact classification, fiduciary duty, disclosure obligations. SFR, MF, commercial NNN, storage, and rental showings. Four training modes.</p>
-          <a class="launch-btn" id="btn-agentwalkthrough" href="#">Launch</a>
+          <div class="audience-pills"><span class="pill pill-re">PA License</span></div>
+          <a class="launch-btn" id="btn-agentwalkthrough" href="#" target="_blank" rel="noopener" onclick="trackLaunch('AgentWalkthrough')">Launch</a>
         </div>
 
       </div>
     </div>
 
-    <!-- Specialty Assets -->
-    <div>
-      <div class="section-label">Specialty Assets</div>
+    <!-- ─────────────────────────────────────────────────────────── -->
+    <!-- SECTION 3: Specialty Assets                                -->
+    <!-- ─────────────────────────────────────────────────────────── -->
+    <div class="section-group" data-audience="re">
+      <div class="section-label">
+        Specialty Assets
+        <span class="audience-tag">Storage, Commercial &amp; Non-Traditional</span>
+      </div>
       <div class="grid">
 
         <div class="card">
@@ -309,8 +624,9 @@
             </div>
             <div class="persona-badge">5 personas</div>
           </div>
-          <p class="card-desc">Self-storage-specific conversations: owner acquisitions, tenant negotiations, investor pitches, and operational objections.</p>
-          <a class="launch-btn" id="btn-storage" href="#">Launch</a>
+          <p class="card-desc">Self-storage-specific conversations: owner acquisitions, tenant negotiations, investor pitches, and operational objections. Built for storage-first operators.</p>
+          <div class="audience-pills"><span class="pill pill-re">Storage</span></div>
+          <a class="launch-btn" id="btn-storage" href="#" target="_blank" rel="noopener" onclick="trackLaunch('StoragePractice')">Launch</a>
         </div>
 
         <div class="card">
@@ -321,16 +637,22 @@
             </div>
             <div class="persona-badge">5 personas</div>
           </div>
-          <p class="card-desc">NNN leases, cap-rate negotiations, tenant buildouts, and investor underwriting calls. Build commercial confidence.</p>
-          <a class="launch-btn" id="btn-commercial" href="#">Launch</a>
+          <p class="card-desc">NNN leases, cap-rate negotiations, tenant buildouts, and investor underwriting calls. Build commercial confidence before you're in the room.</p>
+          <div class="audience-pills"><span class="pill pill-re">Commercial</span></div>
+          <a class="launch-btn" id="btn-commercial" href="#" target="_blank" rel="noopener" onclick="trackLaunch('CommercialPractice')">Launch</a>
         </div>
 
       </div>
     </div>
 
-    <!-- Finance & Advisory -->
-    <div>
-      <div class="section-label">Finance &amp; Advisory</div>
+    <!-- ─────────────────────────────────────────────────────────── -->
+    <!-- SECTION 4: Finance / Lending                               -->
+    <!-- ─────────────────────────────────────────────────────────── -->
+    <div class="section-group" data-audience="re">
+      <div class="section-label">
+        Finance &amp; Lending
+        <span class="audience-tag">Lenders, Borrowers &amp; Deal Structuring</span>
+      </div>
       <div class="grid">
 
         <div class="card">
@@ -341,8 +663,9 @@
             </div>
             <div class="persona-badge">4 personas</div>
           </div>
-          <p class="card-desc">Navigate deal terms with hard money lenders, DSCR underwriters, and private capital sources. Loan scenarios start to finish.</p>
-          <a class="launch-btn" id="btn-lender" href="#">Launch</a>
+          <p class="card-desc">Navigate deal terms with hard money lenders, DSCR underwriters, and private capital sources. Loan scenarios from application to close.</p>
+          <div class="audience-pills"><span class="pill pill-re">Lending</span></div>
+          <a class="launch-btn" id="btn-lender" href="#" target="_blank" rel="noopener" onclick="trackLaunch('LenderPractice')">Launch</a>
         </div>
 
         <div class="card">
@@ -353,20 +676,35 @@
             </div>
             <div class="persona-badge">advanced</div>
           </div>
-          <p class="card-desc">Double-close, gap funding, and transactional lending scenarios. Practice structuring short-window lending deals under time pressure.</p>
-          <a class="launch-btn" id="btn-lendercommand" href="#">Launch</a>
+          <p class="card-desc">Double-close, gap funding, and transactional lending scenarios. Practice structuring short-window lending deals under real time pressure.</p>
+          <div class="audience-pills"><span class="pill pill-re">Lending</span></div>
+          <a class="launch-btn" id="btn-lendercommand" href="#" target="_blank" rel="noopener" onclick="trackLaunch('LenderCommand')">Launch</a>
         </div>
+
+      </div>
+    </div>
+
+    <!-- ─────────────────────────────────────────────────────────── -->
+    <!-- SECTION 5: Education / Advisor                             -->
+    <!-- ─────────────────────────────────────────────────────────── -->
+    <div class="section-group" data-audience="re">
+      <div class="section-label">
+        Education &amp; Advisor Tools
+        <span class="audience-tag">Team Training &amp; Q&amp;A</span>
+      </div>
+      <div class="grid">
 
         <div class="card">
           <div class="card-header">
             <div>
               <div class="card-title">Virtual Steve</div>
-              <div class="category-tag">REI Q&amp;A advisor</div>
+              <div class="category-tag">REI Q&amp;A advisor — ask anything</div>
             </div>
             <div class="persona-badge">1 advisor</div>
           </div>
-          <p class="card-desc">Ask anything about deal structure, Gorilla systems, H4H criteria, or platform workflows. Steve's brain, available 24/7.</p>
-          <a class="launch-btn" id="btn-virtualsteve" href="#">Launch</a>
+          <p class="card-desc">Ask anything about deal structure, Gorilla systems, H4H criteria, or platform workflows. Steve's brain — available 24/7 without scheduling a call.</p>
+          <div class="audience-pills"><span class="pill pill-re">Team Q&amp;A</span></div>
+          <a class="launch-btn" id="btn-virtualsteve" href="#" target="_blank" rel="noopener" onclick="trackLaunch('Virtual Steve')">Launch</a>
         </div>
 
         <div class="card">
@@ -377,16 +715,22 @@
             </div>
             <div class="persona-badge">varies</div>
           </div>
-          <p class="card-desc">Structured real estate education for new agents, assistants, and team members. Deal math, terminology, platform workflow.</p>
-          <a class="launch-btn" id="btn-educator" href="#">Launch</a>
+          <p class="card-desc">Structured real estate education for new agents, assistants, and team members. Deal math, terminology, platform workflow — no prior experience needed.</p>
+          <div class="audience-pills"><span class="pill pill-re">New Team</span><span class="pill pill-biz">Training</span></div>
+          <a class="launch-btn" id="btn-educator" href="#" target="_blank" rel="noopener" onclick="trackLaunch('REI Educator')">Launch</a>
         </div>
 
       </div>
     </div>
 
-    <!-- Presentation & Language -->
-    <div>
-      <div class="section-label">Presentation &amp; Language</div>
+    <!-- ─────────────────────────────────────────────────────────── -->
+    <!-- SECTION 6: Presentation / Language (Business)             -->
+    <!-- ─────────────────────────────────────────────────────────── -->
+    <div class="section-group" data-audience="biz">
+      <div class="section-label">
+        Presentation &amp; Language
+        <span class="audience-tag">Business &amp; Professional Communication</span>
+      </div>
       <div class="grid">
 
         <div class="card">
@@ -397,8 +741,9 @@
             </div>
             <div class="persona-badge">varies</div>
           </div>
-          <p class="card-desc">Practice high-stakes fundraising conversations with simulated investors. Build confidence before the real ask.</p>
-          <a class="launch-btn" id="btn-raiseready" href="#">Launch</a>
+          <p class="card-desc">Practice high-stakes fundraising conversations with simulated investors. Build the confidence to make the ask — before your deal depends on it.</p>
+          <div class="audience-pills"><span class="pill pill-biz">Fundraising</span><span class="pill pill-re">Investors</span></div>
+          <a class="launch-btn" id="btn-raiseready" href="#" target="_blank" rel="noopener" onclick="trackLaunch('RaiseReady')">Launch</a>
         </div>
 
         <div class="card">
@@ -409,8 +754,9 @@
             </div>
             <div class="persona-badge">varies</div>
           </div>
-          <p class="card-desc">Say the hard thing clearly. Difficult conversations, feedback delivery, and high-stakes communication without real-world pressure.</p>
-          <a class="launch-btn" id="btn-sayit" href="#">Launch</a>
+          <p class="card-desc">Say the hard thing clearly. Difficult conversations, feedback delivery, and high-stakes communication without the real-world fallout of getting it wrong.</p>
+          <div class="audience-pills"><span class="pill pill-biz">Communication</span></div>
+          <a class="launch-btn" id="btn-sayit" href="#" target="_blank" rel="noopener" onclick="trackLaunch('SayIt')">Launch</a>
         </div>
 
         <div class="card">
@@ -421,58 +767,381 @@
             </div>
             <div class="persona-badge">any script</div>
           </div>
-          <p class="card-desc">Upload your script. AI plays every other character. Rehearse until every line lands exactly right.</p>
-          <a class="launch-btn" id="btn-sceneloop" href="#">Launch</a>
+          <p class="card-desc">Upload your script. AI plays every other character. Rehearse until every line lands exactly right. Sales scripts, pitch decks, talking points — anything.</p>
+          <div class="audience-pills"><span class="pill pill-biz">Scripted</span></div>
+          <a class="launch-btn" id="btn-sceneloop" href="#" target="_blank" rel="noopener" onclick="trackLaunch('SceneLoop')">Launch</a>
         </div>
 
         <div class="card">
           <div class="card-header">
             <div>
-              <div class="card-title">SpeakUp Practice</div>
-              <div class="category-tag">Public speaking &amp; presentation</div>
+              <div class="card-title">SpeakUp</div>
+              <div class="category-tag">Public speaking &amp; presentation delivery</div>
             </div>
             <div class="persona-badge">varies</div>
           </div>
-          <p class="card-desc">Build public speaking confidence through structured practice. Presentations, pitches, and on-camera delivery reps.</p>
-          <a class="launch-btn" id="btn-speakup" href="#">Launch</a>
+          <p class="card-desc">Build public speaking confidence through structured practice. Presentations, pitches, and on-camera delivery reps before the live moment counts.</p>
+          <div class="audience-pills"><span class="pill pill-biz">Speaking</span></div>
+          <a class="launch-btn" id="btn-speakup" href="#" target="_blank" rel="noopener" onclick="trackLaunch('SpeakUp')">Launch</a>
         </div>
 
       </div>
     </div>
 
-    <footer>Projects with a Purpose &bull; Full Training Suite &bull; PwP &copy; 2026</footer>
+    <!-- ─────────────────────────────────────────────────────────── -->
+    <!-- SECTION 7: School / Career Readiness (NEW)                 -->
+    <!-- ─────────────────────────────────────────────────────────── -->
+    <div class="section-group" data-audience="school">
+      <div class="section-label" style="color: rgba(42,180,180,0.6); border-color: rgba(42,180,180,0.12);">
+        School &amp; Career Readiness
+        <span class="audience-tag" style="color: rgba(42,180,180,0.4);">Students, Educators &amp; Young Professionals</span>
+      </div>
+
+      <div style="font-size:0.82rem; color:rgba(212,227,247,0.38); margin-bottom:1.2rem; line-height:1.65; max-width:680px;">
+        These tools were built for real estate professionals — but the skills they build are universal. Public speaking, handling difficult conversations, fundraising for your student organization, and rehearsing before a presentation are all the same reps, different context. Practice before it counts here too.
+      </div>
+
+      <div class="grid">
+
+        <div class="card school-card">
+          <div class="card-header">
+            <div>
+              <div class="card-title">Public Speaking Practice</div>
+              <div class="category-tag">Presentations, speeches, pitches</div>
+            </div>
+            <div class="persona-badge">school &amp; career</div>
+          </div>
+          <p class="card-desc">Class presentations, student government speeches, job interview answers, TEDx-style talks. Practice out loud until the nervousness is gone and the words are yours.</p>
+          <div class="audience-pills"><span class="pill pill-sch">Student</span><span class="pill pill-biz">Career</span></div>
+          <a class="launch-btn" id="btn-school-speakup" href="#" target="_blank" rel="noopener" onclick="trackLaunch('SpeakUp (School)')">Launch</a>
+        </div>
+
+        <div class="card school-card">
+          <div class="card-header">
+            <div>
+              <div class="card-title">Script &amp; Scene Rehearsal</div>
+              <div class="category-tag">Theater, class presentations &amp; debate</div>
+            </div>
+            <div class="persona-badge">any role</div>
+          </div>
+          <p class="card-desc">Drama class, debate prep, oral history projects, or college essay readings. Paste your script, let AI play every other character, and rehearse until it's ready.</p>
+          <div class="audience-pills"><span class="pill pill-sch">Student</span><span class="pill pill-sch">Theater</span></div>
+          <a class="launch-btn" id="btn-school-sceneloop" href="#" target="_blank" rel="noopener" onclick="trackLaunch('SceneLoop (School)')">Launch</a>
+        </div>
+
+        <div class="card school-card">
+          <div class="card-header">
+            <div>
+              <div class="card-title">Difficult Conversations</div>
+              <div class="category-tag">Conflict resolution &amp; leadership</div>
+            </div>
+            <div class="persona-badge">leadership</div>
+          </div>
+          <p class="card-desc">Practice giving hard feedback, resolving team conflicts, and having conversations you'd normally avoid. Essential for student leaders, interns, and first jobs.</p>
+          <div class="audience-pills"><span class="pill pill-sch">Student</span><span class="pill pill-biz">Leader</span></div>
+          <a class="launch-btn" id="btn-school-sayit" href="#" target="_blank" rel="noopener" onclick="trackLaunch('SayIt (School)')">Launch</a>
+        </div>
+
+        <div class="card school-card">
+          <div class="card-header">
+            <div>
+              <div class="card-title">Grant &amp; Pitch Practice</div>
+              <div class="category-tag">Club fundraising &amp; scholarship pitches</div>
+            </div>
+            <div class="persona-badge">org leaders</div>
+          </div>
+          <p class="card-desc">Pitching for student organization funding, scholarship interviews, startup pitch competitions, or community grant applications. Practice the ask before the panel.</p>
+          <div class="audience-pills"><span class="pill pill-sch">Student Org</span><span class="pill pill-biz">Startup</span></div>
+          <a class="launch-btn" id="btn-school-raiseready" href="#" target="_blank" rel="noopener" onclick="trackLaunch('RaiseReady (School)')">Launch</a>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ─────────────────────────────────────────────────────────── -->
+    <!-- Beta CTA                                                   -->
+    <!-- ─────────────────────────────────────────────────────────── -->
+    <div class="beta-section">
+      <h2>🧪 Early Tester Access</h2>
+      <p>New tools drop regularly — new scenarios, new industries, school editions, and coaching features. Get notified first and help shape what gets built next.</p>
+      <form class="beta-form" onsubmit="submitBeta(event)">
+        <input type="email" id="beta-email" placeholder="your@email.com" required />
+        <select id="beta-usecase">
+          <option value="">I'm a…</option>
+          <option value="agent">Real Estate Agent</option>
+          <option value="investor">Investor / Wholesaler</option>
+          <option value="lender">Lender / Finance</option>
+          <option value="student">Student</option>
+          <option value="educator">Educator / Coach</option>
+          <option value="business">Business Professional</option>
+          <option value="other">Other</option>
+        </select>
+        <button type="submit">Get Early Access</button>
+      </form>
+      <p id="beta-thanks">✓ You're on the list. We'll reach out when new tools are ready.</p>
+    </div>
+
+    <footer>
+      Projects with a Purpose &bull; Full Training Suite &bull; v2.1 &bull; 2026-05-27<br>
+      PwP &copy; 2026 — Gorilla Realty Group &bull; Voice features require Chrome or Edge desktop<br>
+      <em>For educational and professional training use only. Not a substitute for licensed legal, financial, or real estate advice.</em>
+    </footer>
 
   </main>
 
+  <!-- ─────────────────────────────────────────────────────────── -->
+  <!-- Feedback float + modal                                     -->
+  <!-- ─────────────────────────────────────────────────────────── -->
+  <button id="feedback-float" onclick="openFeedback()">💬 Leave Feedback</button>
+
+  <div class="modal-overlay" id="feedback-modal">
+    <div class="modal">
+      <div id="feedback-form-wrap">
+        <h3>Session Feedback</h3>
+        <p class="modal-sub">Help us improve — takes 60 seconds. Tell us how a tool actually performed.</p>
+
+        <label>Which tool did you just use?</label>
+        <select id="fb-tool">
+          <option value="">Select a tool…</option>
+          <option>Acquisition Training</option>
+          <option>Hard Scenarios</option>
+          <option>SellerPractice</option>
+          <option>WholesalerPractice</option>
+          <option>BuyerPractice</option>
+          <option>BrokerPractice</option>
+          <option>AgentPractice</option>
+          <option>AgentWalkthrough</option>
+          <option>StoragePractice</option>
+          <option>CommercialPractice</option>
+          <option>LenderPractice</option>
+          <option>LenderCommand</option>
+          <option>Virtual Steve</option>
+          <option>REI Educator</option>
+          <option>RaiseReady</option>
+          <option>SayIt</option>
+          <option>SceneLoop</option>
+          <option>SpeakUp</option>
+          <option>Public Speaking Practice (School)</option>
+          <option>Script &amp; Scene Rehearsal (School)</option>
+          <option>Difficult Conversations (School)</option>
+          <option>Grant &amp; Pitch Practice (School)</option>
+        </select>
+
+        <label>Was it useful?</label>
+        <div class="rating-row">
+          <button type="button" class="rating-btn" onclick="selectRating('fb-useful','Yes')">Yes ✓</button>
+          <button type="button" class="rating-btn" onclick="selectRating('fb-useful','Mostly')">Mostly</button>
+          <button type="button" class="rating-btn" onclick="selectRating('fb-useful','Not Really')">Not Really</button>
+        </div>
+        <input type="hidden" id="fb-useful" value="" />
+
+        <label>Realism of the AI</label>
+        <div class="rating-row">
+          <button type="button" class="rating-btn" onclick="selectRating('fb-realism','1')">1</button>
+          <button type="button" class="rating-btn" onclick="selectRating('fb-realism','2')">2</button>
+          <button type="button" class="rating-btn" onclick="selectRating('fb-realism','3')">3</button>
+          <button type="button" class="rating-btn" onclick="selectRating('fb-realism','4')">4</button>
+          <button type="button" class="rating-btn" onclick="selectRating('fb-realism','5')">5 ★</button>
+        </div>
+        <input type="hidden" id="fb-realism" value="" />
+
+        <label>Difficulty level</label>
+        <div class="rating-row">
+          <button type="button" class="rating-btn" onclick="selectRating('fb-difficulty','Too Easy')">Too Easy</button>
+          <button type="button" class="rating-btn" onclick="selectRating('fb-difficulty','Right')">Just Right</button>
+          <button type="button" class="rating-btn" onclick="selectRating('fb-difficulty','Too Hard')">Too Hard</button>
+        </div>
+        <input type="hidden" id="fb-difficulty" value="" />
+
+        <label>Would you recommend it?</label>
+        <div class="rating-row">
+          <button type="button" class="rating-btn" onclick="selectRating('fb-recommend','Yes')">Yes</button>
+          <button type="button" class="rating-btn" onclick="selectRating('fb-recommend','Maybe')">Maybe</button>
+          <button type="button" class="rating-btn" onclick="selectRating('fb-recommend','No')">No</button>
+        </div>
+        <input type="hidden" id="fb-recommend" value="" />
+
+        <label>I'm a…</label>
+        <select id="fb-usecase">
+          <option value="">Select…</option>
+          <option value="agent">Agent / Broker</option>
+          <option value="investor">Investor / Wholesaler</option>
+          <option value="lender">Lender</option>
+          <option value="student">Student</option>
+          <option value="educator">Educator / Coach</option>
+          <option value="business">Business Professional</option>
+          <option value="other">Other</option>
+        </select>
+
+        <label>Any bugs or issues? (optional)</label>
+        <textarea id="fb-bugs" placeholder="Describe any bugs, glitches, or things that felt broken…"></textarea>
+
+        <label>Other notes (optional)</label>
+        <textarea id="fb-notes" placeholder="Anything else — suggestions, scenarios you want added, etc."></textarea>
+
+        <div class="modal-footer">
+          <button class="btn-cancel" onclick="closeFeedback()">Cancel</button>
+          <button class="btn-submit" onclick="submitFeedback()">Submit Feedback</button>
+        </div>
+      </div>
+      <div id="feedback-thanks">
+        <p>Thank you — feedback received ✓</p>
+        <small>Your input directly shapes what gets built next.</small>
+        <div class="modal-footer" style="justify-content:center; margin-top:1rem;">
+          <button class="btn-cancel" onclick="closeFeedback()">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─────────────────────────────────────────────────────────── -->
+  <!-- Scripts                                                    -->
+  <!-- ─────────────────────────────────────────────────────────── -->
   <script>
+    // ── Config load ─────────────────────────────────────────────
     fetch('/config')
       .then(r => r.json())
       .then(cfg => {
         // REI Acquisition
-        document.getElementById('btn-acquisition').href     = cfg.acquisitionUrl;
-        document.getElementById('btn-hardscenarios').href   = cfg.hardScenariosUrl;
-        document.getElementById('btn-seller').href          = cfg.sellerUrl;
-        document.getElementById('btn-wholesaler').href      = cfg.wholesalerUrl;
-        // REI Representation
-        document.getElementById('btn-buyer').href           = cfg.buyerUrl;
-        document.getElementById('btn-broker').href          = cfg.brokerUrl;
-        document.getElementById('btn-agent').href           = cfg.agentUrl;
+        document.getElementById('btn-acquisition').href    = cfg.acquisitionUrl;
+        document.getElementById('btn-hardscenarios').href  = cfg.hardScenariosUrl;
+        document.getElementById('btn-seller').href         = cfg.sellerUrl;
+        document.getElementById('btn-wholesaler').href     = cfg.wholesalerUrl;
+        // Representation
+        document.getElementById('btn-buyer').href          = cfg.buyerUrl;
+        document.getElementById('btn-broker').href         = cfg.brokerUrl;
+        document.getElementById('btn-agent').href          = cfg.agentUrl;
         document.getElementById('btn-agentwalkthrough').href = cfg.agentWalkthroughUrl;
         // Specialty Assets
-        document.getElementById('btn-storage').href         = cfg.storageUrl;
-        document.getElementById('btn-commercial').href      = cfg.commercialUrl;
-        // Finance & Advisory
-        document.getElementById('btn-lender').href          = cfg.lenderUrl;
-        document.getElementById('btn-lendercommand').href   = cfg.lenderCommandUrl;
-        document.getElementById('btn-virtualsteve').href    = cfg.virtualSteveUrl;
-        document.getElementById('btn-educator').href        = cfg.educatorUrl;
-        // Presentation & Language
-        document.getElementById('btn-raiseready').href      = cfg.raisereadyUrl;
-        document.getElementById('btn-sayit').href           = cfg.sayitUrl;
-        document.getElementById('btn-sceneloop').href       = cfg.sceneloopUrl;
-        document.getElementById('btn-speakup').href         = cfg.speakupUrl;
+        document.getElementById('btn-storage').href        = cfg.storageUrl;
+        document.getElementById('btn-commercial').href     = cfg.commercialUrl;
+        // Finance / Lending
+        document.getElementById('btn-lender').href         = cfg.lenderUrl;
+        document.getElementById('btn-lendercommand').href  = cfg.lenderCommandUrl;
+        // Education / Advisor
+        document.getElementById('btn-virtualsteve').href   = cfg.virtualSteveUrl;
+        document.getElementById('btn-educator').href       = cfg.educatorUrl;
+        // Presentation / Language
+        document.getElementById('btn-raiseready').href     = cfg.raisereadyUrl;
+        document.getElementById('btn-sayit').href          = cfg.sayitUrl;
+        document.getElementById('btn-sceneloop').href      = cfg.sceneloopUrl;
+        document.getElementById('btn-speakup').href        = cfg.speakupUrl;
+        // School / Career Readiness
+        document.getElementById('btn-school-speakup').href    = cfg.schoolPublicSpeakUrl;
+        document.getElementById('btn-school-sceneloop').href  = cfg.schoolSceneloopUrl;
+        document.getElementById('btn-school-sayit').href      = cfg.schoolSayitUrl;
+        document.getElementById('btn-school-raiseready').href = cfg.schoolRaisereadyUrl;
       })
-      .catch(err => console.warn('Config load failed:', err));
+      .catch(err => console.warn('[PwP] Config load failed:', err));
+
+    // ── Audience filter ─────────────────────────────────────────
+    function filterAudience(type) {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      event.target.classList.add('active');
+
+      document.querySelectorAll('.section-group').forEach(sec => {
+        const aud = sec.dataset.audience;
+        if (type === 'all' || aud === type) {
+          sec.classList.remove('hidden');
+        } else {
+          sec.classList.add('hidden');
+        }
+      });
+    }
+
+    // ── Launch tracking (session-local) ─────────────────────────
+    function trackLaunch(toolName) {
+      // Set the last-launched tool in sessionStorage for the feedback pre-fill
+      try { sessionStorage.setItem('lastTool', toolName); } catch {}
+    }
+
+    // ── Feedback modal ──────────────────────────────────────────
+    function openFeedback() {
+      document.getElementById('feedback-form-wrap').style.display = 'block';
+      document.getElementById('feedback-thanks').style.display = 'none';
+      document.getElementById('feedback-modal').classList.add('open');
+      // Pre-fill tool if coming from a recent launch
+      try {
+        const last = sessionStorage.getItem('lastTool');
+        if (last) {
+          const sel = document.getElementById('fb-tool');
+          for (let o of sel.options) {
+            if (o.text === last) { sel.value = o.value || o.text; break; }
+          }
+        }
+      } catch {}
+    }
+    function closeFeedback() {
+      document.getElementById('feedback-modal').classList.remove('open');
+    }
+    document.getElementById('feedback-modal').addEventListener('click', e => {
+      if (e.target === document.getElementById('feedback-modal')) closeFeedback();
+    });
+
+    function selectRating(fieldId, value) {
+      document.getElementById(fieldId).value = value;
+      // Highlight selected button within its row
+      const field = document.getElementById(fieldId);
+      const row = field.previousElementSibling;
+      row.querySelectorAll('.rating-btn').forEach(b => {
+        b.classList.toggle('selected', b.textContent.replace(/\s/g,'').startsWith(value.replace(/\s/g,'')));
+      });
+    }
+
+    async function submitFeedback() {
+      const tool = document.getElementById('fb-tool').value;
+      if (!tool) { alert('Please select which tool you used.'); return; }
+
+      const payload = {
+        tool,
+        useful:           document.getElementById('fb-useful').value,
+        realism:          document.getElementById('fb-realism').value,
+        difficulty:       document.getElementById('fb-difficulty').value,
+        would_recommend:  document.getElementById('fb-recommend').value,
+        use_case:         document.getElementById('fb-usecase').value,
+        bugs:             document.getElementById('fb-bugs').value,
+        notes:            document.getElementById('fb-notes').value,
+      };
+
+      try {
+        const res = await fetch('/api/feedback', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+        });
+        const data = await res.json();
+        if (data.ok) {
+          document.getElementById('feedback-form-wrap').style.display = 'none';
+          document.getElementById('feedback-thanks').style.display = 'block';
+        } else {
+          alert('Feedback not saved: ' + (data.error || 'unknown error'));
+        }
+      } catch {
+        alert('Network error — feedback not saved. Please try again.');
+      }
+    }
+
+    // ── Beta signup ─────────────────────────────────────────────
+    async function submitBeta(e) {
+      e.preventDefault();
+      const email    = document.getElementById('beta-email').value.trim();
+      const use_case = document.getElementById('beta-usecase').value;
+      if (!email) return;
+      try {
+        const res = await fetch('/api/beta-signup', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, use_case }),
+        });
+        const data = await res.json();
+        if (data.ok) {
+          document.getElementById('beta-email').value = '';
+          document.getElementById('beta-thanks').style.display = 'block';
+        }
+      } catch {
+        alert('Network error — please try again.');
+      }
+    }
   </script>
 
 </body>
